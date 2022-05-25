@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import countriesData from "./data/countries-data.json";
+import SearchBar from "./SearchBar";
+import CountriesDetail from "./CountriesDetail";
 
 function App() {
+  const [inputField, setInputField] = useState("");
+  const [countries, setCountries] = useState([]);
+
+  const handleInputFieldOnChange = (e) => {
+    e.preventDefault();
+    setInputField(e.target.value);
+  };
+
+  useEffect(() => {
+    const updatedCountries = countriesData.filter((country) => {
+      return (
+        country.name.toLowerCase().indexOf(inputField.toLowerCase()) !== -1 ||
+        country.capital.toLowerCase().indexOf(inputField.toLowerCase()) !== -1
+      );
+    });
+    setCountries(updatedCountries);
+  }, [inputField]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main-container">
+      <SearchBar handleOnChange={handleInputFieldOnChange} input={inputField} />
+      <CountriesDetail countries={countries} />
     </div>
   );
 }
