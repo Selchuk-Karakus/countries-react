@@ -37,11 +37,25 @@ h3 {
 }
 
 .searchBar-container {
-  flex-basis: 100%;
-  margin: 2rem;
+  flex-basis: 47%;
+  margin: 2rem 0;
 }
+
 
 .searchBar-inputField {
   padding: 15px;
   width: 30rem;
+  margin-left: 1rem;
+}
+
+.dropdown-menu {
+  flex-basis: 47%;
+  margin: 2rem 0;
+  text-align: end;
+}
+
+select {
+   padding: 15px;
+  width: 15rem;
+  margin-right: 1rem;
 }
